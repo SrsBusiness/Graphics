@@ -6,7 +6,15 @@
  * instructions for compiling, etc., if you used something besides the
  * standard Makefile.
  *
- * Group Members: <FILL IN>
- * Email Addresses:
+ * Group Members: Danny Chen
+ * Email Addresses: dchenviolinist@gmail.com
  */
 
+ B = Draw a Branch  (Straight cylinder)
+ L = Draw a Leaf
+ + = rotate PI / 6 radians counterclockwise
+ - = rotate PI / 6 radians counterclockwise
+ S = scale everything down by factor of .75
+ 
+ Axiom: B
+ Iterative function: BL -> SBB[+BL]BB[-BL]BL 

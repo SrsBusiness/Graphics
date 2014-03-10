@@ -215,7 +215,7 @@ void load_matrix(Matrix3f m){
 void draw_cylinder(GLdouble radius, GLdouble height, Vector3f base){
     glBegin(GL_TRIANGLE_FAN);
     glColor3f(0.54,0.27,0.07); 
-    GLdouble theta = 2 * PI / 8;
+    GLdouble theta = 2 * PI / 16;
     GLdouble r = cos(theta);
     GLdouble tan_fact = tan(theta);
     GLdouble x, y, z;
@@ -223,7 +223,7 @@ void draw_cylinder(GLdouble radius, GLdouble height, Vector3f base){
     y = base.v[1];
     z = 0;
     glVertex3f(base.v[0], y, base.v[2]);
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 16 + 1; i++){
         glVertex3f(x + base.v[0], y, z + base.v[2]);
         GLdouble tx = -1 * z;
         GLdouble tz = x;
@@ -239,7 +239,7 @@ void draw_cylinder(GLdouble radius, GLdouble height, Vector3f base){
     y += height;
     z = 0;
     glVertex3f(base.v[0], y, base.v[2]);
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 16 + 1; i++){
         glVertex3f(x + base.v[0], y, z + base.v[2]);
         GLdouble tx = -1 * z;
         GLdouble tz = x;
@@ -256,7 +256,7 @@ void draw_cylinder(GLdouble radius, GLdouble height, Vector3f base){
     z = 0;
     glVertex3f(base.v[0], y, base.v[2]);
     glVertex3f(base.v[0], y + height, base.v[2]);
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 16 + 1; i++){
         glVertex3f(x + base.v[0], y, z + base.v[2]);
         glVertex3f(x + base.v[0], y + height, z + base.v[2]);
         GLdouble tx = -1 * z;
@@ -273,18 +273,50 @@ void draw_cylinder(GLdouble radius, GLdouble height, Vector3f base){
 
 void drawLeaf(void) {
     /* ADD YOUR CODE to make the 2D leaf a 3D extrusion */
-
     glColor3d(0.1,0.9,0.1); 
     glBegin(GL_POLYGON);
-    glVertex3d(0.0,0.0, 0);
-    glVertex3d(1.0,0.7, 0);
-    glVertex3d(1.3,1.8, 0);
-    glVertex3d(1.0,2.8, 0);
-    glVertex3d(0.0,4.0, 0);
-    glVertex3d(-1.0,2.8, 0);
-    glVertex3d(-1.3,1.8, 0);
-    glVertex3d(-1.0,0.7, 0);
+    glVertex3d(0.0,0.0, -.2);
+    glVertex3d(1.0,0.7, -.2);
+    glVertex3d(1.3,1.8, -.2);
+    glVertex3d(1.0,2.8, -.2);
+    glVertex3d(0.0,4.0, -.2);
+    glVertex3d(-1.0,2.8, -.2);
+    glVertex3d(-1.3,1.8, -.2);
+    glVertex3d(-1.0,0.7, -.2);
 
+    glEnd();
+    
+    glBegin(GL_POLYGON);
+    glVertex3d(0.0,0.0, .2);
+    glVertex3d(1.0,0.7, .2);
+    glVertex3d(1.3,1.8, .2);
+    glVertex3d(1.0,2.8, .2);
+    glVertex3d(0.0,4.0, .2);
+    glVertex3d(-1.0,2.8, .2);
+    glVertex3d(-1.3,1.8, .2);
+    glVertex3d(-1.0,0.7, .2);
+
+    glEnd();
+
+    glBegin(GL_QUAD_STRIP);
+    glVertex3d(0.0,0.0, -.2);
+    glVertex3d(0.0,0.0, .2);
+    glVertex3d(1.0,0.7, -.2);
+    glVertex3d(1.0,0.7, .2);
+    glVertex3d(1.3,1.8, -.2);
+    glVertex3d(1.3,1.8, .2);
+    glVertex3d(1.0,2.8, -.2);
+    glVertex3d(1.0,2.8, .2);
+    glVertex3d(0.0,4.0, -.2);
+    glVertex3d(0.0,4.0, .2);
+    glVertex3d(-1.0,2.8, -.2);
+    glVertex3d(-1.0,2.8, .2);
+    glVertex3d(-1.3,1.8, -.2);
+    glVertex3d(-1.3,1.8, .2);
+    glVertex3d(-1.0,0.7, -.2);
+    glVertex3d(-1.0,0.7, .2);
+    glVertex3d(0.0,0.0, -.2);
+    glVertex3d(0.0,0.0, .2);
     glEnd();
 }
 /*
@@ -297,7 +329,7 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
 
     /* ADD YOUR CODE to make the 2D branch a 3D extrusion */
     //printf("base: %f, %f. %f\n", base.v[0], base.v[1], base.v[2]);
-    print_matrix("current matrix before draw", current_matrix());
+    //print_matrix("current matrix before draw", current_matrix());
     push();
     rotate(orientation, 0, 1, 0, 0, 0, 0);
     draw_cylinder(radius, length, base);
@@ -325,7 +357,7 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
     for(int i = -1; i <= 1; i+= 2){
         //theta = 2 * PI / 3 * rand() / (GLdouble)RAND_MAX - PI / 3;
         GLdouble theta = i * PI / 6; 
-        printf("theta: %f\n", theta * 180 / PI);
+        //printf("theta: %f\n", theta * 180 / PI);
         //theta = PI / 6;
         //glPushMatrix();
         push();
@@ -347,10 +379,10 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
         rotate(theta, 0, 0, 1, base.v[0], base.v[1], base.v[2]);
         //draw_cylinder(radius, length, base);
         //load_matrix(mmmult(translate_matrix(0, length / 3, 0), current_matrix()));
-        translate(0, 2 * length / 3, 0);
-        //load_matrix(mmmult(scale_matrix(.75, .75, .75), current_matrix()));
+        translate(0, (i + 2) * length / 5, 0);
         scale(.75, .75, .75);
-        print_matrix("current matrix before recursive call", current_matrix());
+        //load_matrix(mmmult(scale_matrix(.75, .75, .75), current_matrix()));
+        //print_matrix("current matrix before recursive call", current_matrix());
         //mmmult(quaternion(PI / 6, (Vector3f){{0, 0, 1, 0}}, base), current_matrix());
         //load_matrix(quaternion(PI / 6, (Vector3f){{0, 0, 1, 0}}, new_base));
         if(level > 0)
@@ -382,10 +414,28 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
  * any other necessary arguments.
  */
 
-void drawPlant(GLdouble rotate) {
-    printf("New Tree\n");
+void drawPlant(GLdouble rotate, int projection) {
+    //printf("New Tree\n");
     orientation += rotate;
+    push();
+    //glMatrixMode(GL_PROJECTION);
+    switch(projection){
+        case 0:
+            printf("Perspective\n");
+            // perspective
+            glFrustum(-2, 2, -2, 2, 1, 2);
+            break;
+        case 1:
+            printf("Ortho\n");
+            glOrtho(-50, 50, -50, -50, 1, 100); 
+            break;
+        default:
+            printf("Unrecognized projection. Using Perspective by default\n");
+            break;
+
+    }
     drawBranch(1, 20, (Vector3f){{0, -20, 0, 1}}, depth);
+    pop();
     /*
        glPushMatrix(); 
        draw_cylinder(1, 20, (Vector3f){{0, 0, 0, 1}});

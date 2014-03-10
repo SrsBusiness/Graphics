@@ -16,7 +16,7 @@ struct Matrix3f{
 
 extern int depth;
 extern float orientation;
-void drawPlant(GLdouble);
+void drawPlant(GLdouble, int);
 void push();
 void pop();
 void rotate(GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble);

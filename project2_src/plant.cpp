@@ -31,7 +31,7 @@ void display(void);
 void init(void);
 
 GLdouble angle = 0;
-
+int projection = 0;
 void key_handler(unsigned char c, int x, int y){
     switch(c){
         case 'a':
@@ -50,6 +50,9 @@ void key_handler(unsigned char c, int x, int y){
         case '?':
             angle = -1 * PI / 6;
             // negative angle around y
+            break;
+        case 'p':
+            projection ^= 1;       
             break;
         case 'q':
             exit(0);
@@ -73,7 +76,7 @@ void motion_handler(int x, int y){
     if(current_button == GLUT_LEFT_BUTTON){
         int dx = x - mouse_x;
         mouse_x = x;
-        angle = PI * dx / 1366;
+        angle = -1 * PI * dx / 1366;
     }
     display();
 }
@@ -106,7 +109,7 @@ void display() {
 
 
     /* See drawplant.c for the definition of this routine */
-    drawPlant(angle);
+    drawPlant(angle, projection);
 
 
     glFlush();  /* Flush all executed OpenGL ops finish */
