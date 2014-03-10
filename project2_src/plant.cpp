@@ -45,11 +45,9 @@ void key_handler(unsigned char c, int x, int y){
             break;
         case '/':
             // positive angle around y
-            glMatrixMode(GL_PROJECTION);
             angle = PI / 6;
             break;
         case '?':
-            glMatrixMode(GL_PROJECTION);
             angle = -1 * PI / 6;
             // negative angle around y
             break;
@@ -60,36 +58,55 @@ void key_handler(unsigned char c, int x, int y){
             break;
     }
     display();
+    angle = 0;
 }
 
+int mouse_x;
+int current_button;
+void mouse_handler(int button, int state, int x, int y ){
+    if(state == GLUT_DOWN && button == GLUT_LEFT_BUTTON){
+        mouse_x = x;
+        current_button = GLUT_LEFT_BUTTON;
+    }
+}
+void motion_handler(int x, int y){
+    if(current_button == GLUT_LEFT_BUTTON){
+        int dx = x - mouse_x;
+        mouse_x = x;
+        angle = PI * dx / 1366;
+    }
+    display();
+}
 int main (int argc, char** argv) {
-  glutInit(&argc,argv);
-  glutInitWindowSize(W, H);
-  glutInitWindowPosition(X_OFF, Y_OFF);
-  glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-  glutCreateWindow("plant");
-  init();
-  glutDisplayFunc(display);
-  glutKeyboardFunc(key_handler);
-  glutMainLoop();
-  return 0;
+    glutInit(&argc,argv);
+    glutInitWindowSize(W, H);
+    glutInitWindowPosition(X_OFF, Y_OFF);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    glutCreateWindow("plant");
+    init();
+    glutDisplayFunc(display);
+    glutKeyboardFunc(key_handler);
+    glutMotionFunc(motion_handler);
+    glutMouseFunc(mouse_handler);
+    glutMainLoop();
+    return 0;
 }
 
 void init() {
-  glClearColor(0.0, 0.0, 0.0, 0.0);  
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glOrtho(-40.0, 40.0, -40.0, 40.0, -10.0, 10.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);  
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-40.0, 40.0, -40.0, 40.0, -10.0, 10.0);
 }
 
 
 void display() {
-	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-	/* See drawplant.c for the definition of this routine */
-	drawPlant(angle);
+    /* See drawplant.c for the definition of this routine */
+    drawPlant(angle);
 
 
     glFlush();  /* Flush all executed OpenGL ops finish */
