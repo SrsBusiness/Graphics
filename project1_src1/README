@@ -1,0 +1,49 @@
+
+Partner1
+-----------
+Name: Danny Chen
+EID: dc33565
+
+Partner2
+-----------
+Name:
+EID:
+
+
+Slip days used: 1
+
+
+Include any special compile instructions here
+--------------------------------------------------------------
+
+
+
+Put the results of the Performance Test here.  
+--------------------------------------------------------------
+Disp 1 Solid:   17.98 sec
+Disp 1 Wire     17.98 sec
+Disp 2          17.99 sec
+Disp 3          17.99 sec
+Disp 4 Solid:   17.99 sec
+Disp 4 Wire:    17.98 sec
+Disp 5          17.98 sec
+Disp 6          17.99 sec
+Disp 7          17.98 sec
+Disp 8          17.99 sec
+Disp 9 Solid    17.99 sec
+Disp 9 Wire     17.99 sec
+
+All of the tests ran with nearly identical runtimes. The botteneck for the runtime was clearly the speed at which
+the test was rotating the camera for each scene. The wireframe tests ran as smoothly as the sold ones.
+ 
+ 
+Mention any interesting items you added which deserves extra credit
+------------------------------------------------------------------------------------------------
+
+
+
+In case your code does not compile or is incomplete, describe the parts you implemented to get partial credits
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+

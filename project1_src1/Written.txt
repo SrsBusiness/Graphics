@@ -1,0 +1,40 @@
+
+Partner1
+-----------
+Name: Danny Chen
+EID: dc33565
+
+Partner2
+-----------
+Name:
+EID:
+
+
+Slip days used: 1
+
+
+Q1
+---
+You have an array of vertices. What would you need to do to produce an object representation using vertex indices?  How would the original array change?  What
+additional data structures would you need?
+
+Answer
+---------
+
+The original vertex array would not need to change. You can simply have an array of indices representing the vertices of the polygon if it were drawn
+using GL_LINE_LOOP or GL_POLYGON. Alternatively you could create the index array such that it is in GL_TRIANGLE_STRIP/FAN format as well.
+
+
+
+Q2
+---
+You want 3 views of the same scene, each taking up 1/4 of the screen. These three views should show the front, side and top views of the object. Describe in words
+what needs to be done with the viewport and camera to accomplish this. How does this affect the viewing frustum?
+
+Answer
+---------
+
+glViewPort() can be used to set which part of the screen to project the object. This allows 3 views of the same scene on the screen simultaneously. To get the
+different views you would need to rotate the camera (possibly translate before rotation) with glRotate() to view the different sides of the object. Assuming you
+want the same perspective for each view, the viewing frustum shouldn't change.
+
