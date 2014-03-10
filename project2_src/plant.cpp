@@ -43,9 +43,11 @@ void key_handler(unsigned char c, int x, int y){
             break;
         case '/':
             // positive angle around y
+            glMatrixMode(GL_PROJECTION);
             rotate(PI / 12, 0, 1, 0, 0, 0, 0);
             break;
         case '?':
+            glMatrixMode(GL_PROJECTION);
             rotate(-1 * PI / 12, 0, 1, 0, 0, 0, 0);
             // negative angle around y
             break;
