@@ -30,6 +30,8 @@ int Y_OFF = 10;	/* window y offset */
 void display(void);
 void init(void);
 
+GLdouble angle = 0;
+
 void key_handler(unsigned char c, int x, int y){
     switch(c){
         case 'a':
@@ -44,14 +46,17 @@ void key_handler(unsigned char c, int x, int y){
         case '/':
             // positive angle around y
             glMatrixMode(GL_PROJECTION);
-            rotate(PI / 12, 0, 1, 0, 0, 0, 0);
+            angle = PI / 6;
             break;
         case '?':
             glMatrixMode(GL_PROJECTION);
-            rotate(-1 * PI / 12, 0, 1, 0, 0, 0, 0);
+            angle = -1 * PI / 6;
             // negative angle around y
             break;
         case 'q':
+            exit(0);
+            break;
+        default:
             break;
     }
     display();
@@ -84,7 +89,7 @@ void display() {
 
 
 	/* See drawplant.c for the definition of this routine */
-	drawPlant();
+	drawPlant(angle);
 
 
     glFlush();  /* Flush all executed OpenGL ops finish */

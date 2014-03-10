@@ -23,15 +23,7 @@
 using namespace std;
 
 int depth = 4;
-
-struct Vector3f{
-    GLdouble v[4];
-} typedef Vector3f;
-
-struct Matrix3f{
-    GLdouble m[16];
-} typedef Matrix3f;
-
+GLfloat orientation = 0;
 vector<Matrix3f> stack;
 
 void load_matrix(Matrix3f);
@@ -306,8 +298,11 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
     /* ADD YOUR CODE to make the 2D branch a 3D extrusion */
     //printf("base: %f, %f. %f\n", base.v[0], base.v[1], base.v[2]);
     print_matrix("current matrix before draw", current_matrix());
+    push();
+    rotate(orientation, 0, 1, 0, 0, 0, 0);
     draw_cylinder(radius, length, base);
-            drawLeaf();
+    drawLeaf();
+    pop();
     /*    
           push();
           Matrix3f quat = quaternion(30, (Vector3f){{0, 0, 1, 0}}, base);
@@ -387,8 +382,9 @@ void drawBranch(GLdouble radius, GLdouble length, Vector3f base, int level) {
  * any other necessary arguments.
  */
 
-void drawPlant(void) {
+void drawPlant(GLdouble rotate) {
     printf("New Tree\n");
+    orientation += rotate;
     drawBranch(1, 20, (Vector3f){{0, -20, 0, 1}}, depth);
     /*
        glPushMatrix(); 
